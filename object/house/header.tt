@@ -1,0 +1,10 @@
+<div style="text-align: center; margin-top: 20px;"><a href="/house/summary" class="action">Summary</a>
+		<a href="/house/btu" class="action" target="_blank">BTU Calculator</a>
+</div>
+<table class="noborder" style="width: 100%; border: 0px;">
+	<tr>
+		<td style="width: 33%;"><a href="/?d=[% date.last_date %]&f=[% s.in.f %]" class="action">[% date.last_date %]</a></td>
+		<td style="width: 33%; text-align: center;"><b>[% date.this_date %]</b></td>
+		<td style="width: 33%; text-align: right;"><a href="/?d=[% date.next_date %]&f=[% s.in.f %]" class="action">[% date.next_date %]</a></td>
+	</tr>
+</table>

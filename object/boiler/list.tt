@@ -1,0 +1,77 @@
+<div class="floatleft">
+<table>
+	<caption>Boiler BTUs</caption>
+	<thead>
+		<tr>
+			<th>Start</th>
+			<th>End</th>
+			<th class="n">Minutes</th>
+			<th class="n">BTUs</th>
+			<th class="n">BTUs/HR</th>
+			<th class="n">KWh</th>
+		</tr>
+	</thead>
+	<tbody>
+[% FOREACH l IN list %]
+		<tr>
+			<td>[% s.format_ts(l.start_ts) %]</td>
+			<td>[% s.format_ts(l.end_ts) %]</td>
+			<td class="n">[% s.format_number(l.minutes) %]</td>
+			<td class="n">[% s.format_number(l.btus) %]</td>
+			<td class="n">[% s.format_number(l.btus_hr) %]</td>
+			<td class="n">[% s.format_number(l.kwh) %]</td>
+		</tr>
+[% END %]
+	</tbody>
+</table>
+</div>
+<div class="floatleft">
+<table>
+	<caption>Boiler Burn Summary</caption>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th class="n">Minutes</th>
+			<th class="n">BTUs</th>
+			<th class="n">KWh</th>
+		</tr>
+	</thead>
+	<tbody>
+[% FOREACH l IN day %]
+		<tr>
+			<td>[% s.format_date(l.stat_date) %]</td>
+			<td class="n">[% s.format_number(l.minutes) %]</td>
+			<td class="n">[% s.format_number(l.btus) %]</td>
+			<td class="n">[% s.format_number(l.kwh) %]</td>
+		</tr>
+[% END %]
+	</tbody>
+</table>
+<table>
+	<caption>Summary</caption>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Desc</th>
+			<th class="n" colspan="2">On Hours</th>
+			<th class="n" colspan="2">Off Hours</th>
+			<th class="n">BTUs</th>
+			<th class="n">KWh</th>
+		</tr>
+	</thead>
+	<tbody>
+[% FOREACH l IN thermos %]
+		<tr>
+			<td>[% s.format_date(l.stat_date) %]</td>
+			<td>[% l.key %]</td>
+			<td class="n">[% l.on %]</td>
+			<td class="n">[% s.format_percent(l.percent_on) %]</td>
+			<td class="n">[% l.off %]</td>
+			<td class="n">[% s.format_percent(l.percent_off) %]</td>
+			<td class="n">[% s.format_number(l.btus) %]</td>
+			<td class="n">[% s.format_number(l.kwh) %]</td>
+		</tr>
+[% END %]
+	</tbody>
+</table>
+</div>

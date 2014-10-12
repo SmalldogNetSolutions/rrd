@@ -1,0 +1,78 @@
+#! /bin/bash
+
+rrdtool graph /data/rrd/content/boilertemp.png \
+--start end-24m --end now -S 2 \
+-h 180 -w 700 \
+DEF:roof_temp=/data/rrd/boilersolarseconds:roof_temp:AVERAGE \
+DEF:hwtank_temp=/data/rrd/boilersolarseconds:hwtank_temp:AVERAGE \
+DEF:outside=/data/rrd/boilersolarseconds:outside:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 200 \
+--rigid \
+--lower-limit 40 \
+LINE1:roof_temp#FF0000:"Roof Temp" \
+LINE1:outside#0000FF:"Wood Tank Temp" \
+LINE1:hwtank_temp#00FF00:"HW Tank Temp" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/boilertempday.png \
+--start end-12h --end now -S 60 \
+-h 180 -w 700 \
+DEF:roof_temp=/data/rrd/boilersolarseconds:roof_temp:AVERAGE \
+DEF:hwtank_temp=/data/rrd/boilersolarseconds:hwtank_temp:AVERAGE \
+DEF:outside=/data/rrd/boilersolarseconds:outside:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 200 \
+--rigid \
+--lower-limit 40 \
+LINE1:roof_temp#FF0000:"Roof Temp" \
+LINE1:outside#0000FF:"Wood Tank Temp" \
+LINE1:hwtank_temp#00FF00:"HW Tank Temp" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/lightlevel.png \
+--start end-24m --end now -S 2 \
+-h 80 -w 700 \
+DEF:light_level=/data/rrd/boilersolarseconds:light_level:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 800 \
+--rigid \
+--lower-limit 500 \
+LINE1:light_level#FF0000:"Light Level" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/lightlevelday.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:light_level=/data/rrd/boilersolarseconds:light_level:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 750 \
+--rigid \
+--lower-limit 650 \
+LINE1:light_level#FF0000:"Light Level" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/solarpump.png \
+--start end-24m --end now -S 2 \
+-h 80 -w 700 \
+DEF:solarpump=/data/rrd/boilersolarseconds:solarpump:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:solarpump#FF0000:"Solar Pump" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/hotwater.png \
+--start end-24m --end now -S 2 \
+-h 80 -w 700 \
+DEF:hotwater=/data/rrd/boilersolar:hotwater:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:hotwater#FF0000:"HW Call" \
+>/dev/null
+

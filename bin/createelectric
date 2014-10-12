@@ -1,0 +1,14 @@
+#! /bin/bash
+
+rrdtool create /data/rrd/electric -s 60 \
+DS:kw_now:GAUGE:90:0:100 \
+DS:kw_today:GAUGE:90:0:1000 \
+DS:kw_peak_today:GAUGE:90:0:100 \
+RRA:AVERAGE:0.5:1:1440 \
+RRA:MIN:0.5:1:1440 \
+RRA:MAX:0.5:1:1440 \
+RRA:LAST:0.5:1:1440 \
+RRA:MIN:0.5:60:2400 \
+RRA:MAX:0.5:60:2400 \
+RRA:LAST:0.5:60:2400 \
+RRA:AVERAGE:0.5:60:2400

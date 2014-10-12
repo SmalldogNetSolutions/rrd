@@ -1,0 +1,17 @@
+#! /bin/bash
+
+rrdtool graph /data/rrd/content/boilertest.png \
+--start end-4d --end now -S 3600 \
+-h 180 -w 700 \
+DEF:roof_temp=/data/rrd/boilersolarseconds:roof_temp:AVERAGE \
+DEF:hwtank_temp=/data/rrd/boilersolarseconds:hwtank_temp:AVERAGE \
+DEF:return_temp=/data/rrd/boilersolarseconds:return_temp:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 135 \
+--rigid \
+--lower-limit 75 \
+LINE1:roof_temp#FF0000:"Roof Temp" \
+LINE1:return_temp#0000FF:"Return Temp" \
+LINE1:hwtank_temp#00FF00:"HW Tank Temp" \
+>/dev/null
+

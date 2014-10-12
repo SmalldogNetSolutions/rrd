@@ -1,0 +1,4 @@
+[% INCLUDE house/header.tt %]
+<div id="hot_water_chart_div" style="width: 100%; height: 250px;"></div>
+<div id="kw_chart_div" style="width: 100%; height: 250px;"></div>
+<div style="text-align: center;"><a href="?d=[% s.in.d %]&f=4">show more</a></div>

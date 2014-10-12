@@ -1,0 +1,7 @@
+MAILTO=chris@smalldognet.com
+
+# daily
+#*/1 * * * * chrissutton /code/rrd/bin/boilergraph
+*/1 * * * * root psql -q -U postgres rrd </code/rrd/db/cron/avgdata.sql
+*/1 * * * * root wget -q -O - http://orcas.smalldognet.com:8081/api/LiveData.xml | /code/rrd/bin/getted.pl
+5 0 * * * root psql -q -U postgres rrd </code/rrd/db/cron/summarizeday.sql

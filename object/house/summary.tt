@@ -1,0 +1,39 @@
+<div id="water_chart_div" style="width: 100%; height: 200px;"></div>
+<div id="heat_chart_div" style="width: 100%; height: 200px;"></div>
+<table>
+	<caption>Data Summary</caption>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th class="n">Heat</th>
+			<th class="n">Heat (pub)</th>
+			<th class="n">Heat (priv)</th>
+			<th class="n">Hot Water</th>
+			<th class="n">Solar Pump</th>
+			<th class="n">Water Bottom Max</th>
+			<th class="n">Light Level</th>
+			<th class="n">Wood Avail</th>
+			<th class="n">Boiler Run</th>
+			<th class="n">Boiler Fire</th>
+			<th class="n">KW</th>
+		</tr>
+	</thead>
+	<tbody>
+[% FOREACH l IN list %]
+		<tr>
+			<td><a href="/?d=[% l.stat_date %]" class="action">[% l.stat_date %]</a></td>
+			<td class="n">[% s.format_percent(l.heat_percent) %]</td>
+			<td class="n">[% s.format_percent(l.public_heat_percent) %]</td>
+			<td class="n">[% s.format_percent(l.private_heat_percent) %]</td>
+			<td class="n">[% s.format_percent(l.hot_water_percent) %]</td>
+			<td class="n">[% s.format_percent(l.solar_pump_percent) %]</td>
+			<td class="n">[% l.water_bottom_max %]</td>
+			<td class="n">[% s.format_number(l.light_level_sum) %]</td>
+			<td class="n">[% s.format_percent(l.wood_avail_percent) %]</td>
+			<td class="n">[% s.format_percent(l.boiler_run_percent) %]</td>
+			<td class="n">[% s.format_percent(l.boiler_fire_percent) %]</td>
+			<td class="n">[% l.kw_sum %]</td>
+		</tr>
+[% END %]
+	</tbody>
+</table>

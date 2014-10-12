@@ -1,0 +1,20 @@
+<h1>BTU Calculator</h1>
+
+<p><a href="http://en.wikipedia.org/wiki/British_thermal_unit" target="_blank">British Thermal Unit</a>: It is the amount of energy needed to cool or heat one pound of water by one degree Fahrenheit.</p>
+
+<p><a href="http://www.fourmilab.ch/hackdiet/www/subsection1_4_2_0_7.html" target="_blank">Weight of water</a>: 1 Gallon = 8.345404 pounds.</p>
+
+<form method="POST" action="[% s.uof %]">
+[% s.html_hidden('process',1) %]
+[% s.html_input('gallons',s.in.gallons,3) %] Gallons x 8.345404 x ([% s.html_input('end_temp',s.in.end_temp,3) %] end temp - [% s.html_input('start_temp',s.in.start_temp,3) %] start temp) = [% IF s.in.btu %]<b>[% s.format_number(s.in.btu) %]</b> BTUs[% END %]<br>
+[% s.html_submit('Calculate') %]
+
+[% IF s.in.btu %]
+<p><a href="http://www.rapidtables.com/convert/energy/BTU_to_kWh.htm" target="_blank">Convert to Kilowatt Hours</a>: 1 kWh = 3412.14 BTU (or 1 BTU = 0.000293 kWh)</p>
+
+<p>[% s.in.btu %] BTU = [% s.in.btu %] / 3412.14 = <b>[% s.in.kwh %]</b> kWh</p>
+
+\$[% s.html_input('kwh_cost',s.in.kwh_cost,5) %] kWh cost * [% s.in.kwh %] = [% IF s.in.btu_cost %]<b>\$[% s.format_number(s.in.btu_cost) %]</b>[% END %]<br>
+[% s.html_submit('Calculate') %]
+[% END %]
+</form>

@@ -1,0 +1,78 @@
+#! /bin/bash
+
+rrdtool graph /data/rrd/content/boilertemp.png \
+--start end-12h --end now -S 60 \
+-h 180 -w 700 \
+DEF:boiler=/data/rrd/boilerdata2:boiler:AVERAGE \
+DEF:outside=/data/rrd/boilerdata2:outside:AVERAGE \
+DEF:boiler_in=/data/rrd/boilerdata2:boiler_in:AVERAGE \
+DEF:garage_temp=/data/rrd/boilerdata2:garage_temp:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 200 \
+--rigid \
+--lower-limit 100 \
+LINE1:boiler#FF0000:"Temp 1" \
+LINE1:boiler_in#00FF00:"Temp 2" \
+LINE1:garage_temp#00FFFF:"Temp 3" \
+LINE1:outside#0000FF:"Tank Temp" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/private.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:private=/data/rrd/boilerdata2:private:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:private#FF0000:"Private Heat Call" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/public.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:public=/data/rrd/boilerdata2:public:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:public#FF0000:"Public Heat Call" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/garage.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:garage=/data/rrd/boilerdata2:garage:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:garage#FF0000:"Garage Heat Call" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/boiler_fire.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:boiler_fire=/data/rrd/boilerdata2:boiler_fire:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:boiler_fire#FF0000:"Boiler Fire" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/boiler_run.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:boiler_run=/data/rrd/boilerdata2:boiler_run:MAX \
+--right-axis 1:0 \
+--color GRID#FFFFFF \
+--color MGRID#FFFFFF \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:boiler_run#FF0000:"Boiler Run" \
+>/dev/null

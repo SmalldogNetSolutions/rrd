@@ -1,0 +1,33 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawHotWater);
+      function drawHotWater() {
+        var data = new google.visualization.DataTable();
+		data.addColumn('string','TS');
+		data.addColumn('number','HWCall');
+		data.addColumn('number','Middle');
+		data.addRows([
+[% FOREACH l IN list %]['[% l.log_time %]',[% l.hot_water %],[% l.water_middle %]][% UNLESS loop.last %],[% END %][% END %]
+        ]);
+
+        var options = {
+          title: 'Hot Water Tank',
+		  hAxis: { textPosition: 'none' },
+		  legend: { position: 'none' },
+		  chartArea:{ width:"95%", height:"80%" },
+		  colors:['blue','green'],
+		  vAxes:[
+			{ maxValue: 140, minValue: 40, textPosition: 'none' },
+			{ maxValue: 2.5, minValue: 1, textPosition: 'none' }
+		  ],
+		  series: {
+			0:{ type: "line", targetAxisIndex: 1, lineWidth: 8 },
+			1:{ type: "line", targetAxisIndex: 0 },
+		  }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('hot_water_chart_div'));
+        chart.draw(data, options);
+      }
+</script>

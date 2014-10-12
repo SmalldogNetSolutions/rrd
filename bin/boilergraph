@@ -1,0 +1,150 @@
+#! /bin/bash
+
+rrdtool graph /data/rrd/content/tank.png \
+--start end-12h --end now -S 60 \
+-h 180 -w 700 \
+DEF:tank=/data/rrd/boiler:tank:AVERAGE \
+DEF:out=/data/rrd/boiler:boiler:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 180 \
+--lower-limit 60 \
+--rigid \
+LINE2:tank#0000FF:"Tank1 Temp" \
+LINE1:out#FF0000:"Boiler Temp" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/electric.png \
+--start end-12h --end now -S 60 \
+-h 180 -w 700 \
+DEF:kw_now=/data/rrd/electric:kw_now:AVERAGE \
+DEF:kw_peak_today=/data/rrd/electric:kw_peak_today:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 12 \
+--lower-limit 0 \
+--rigid \
+LINE1:kw_now#FF0000:"KW Now" \
+LINE1:kw_peak_today#0000FF:"KW Peak" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/electric_total.png \
+--start end-12h --end now -S 60 \
+-h 180 -w 700 \
+DEF:kw_today=/data/rrd/electric:kw_today:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 200 \
+--lower-limit 0 \
+--rigid \
+LINE1:kw_today#FF0000:"KW Today" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/solar.png \
+--start end-12h --end now -S 60 \
+-h 180 -w 700 \
+DEF:roof=/data/rrd/solar:roof:AVERAGE \
+DEF:tank=/data/rrd/solar:tank:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 140 \
+--lower-limit 40 \
+--rigid \
+LINE2:tank#0000FF:"Bottom Tank Temp" \
+LINE1:roof#FF0000:"Middle Tank Temp" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/lightlevel.png \
+--start end-12h --end now -S 60 \
+-h 80 -w 700 \
+DEF:light_level=/data/rrd/solar:light_level:AVERAGE \
+--right-axis 1:0 \
+--upper-limit 1000 \
+--lower-limit 0 \
+--rigid \
+LINE1:light_level#FF0000:"Light Level" \
+>/dev/null
+
+#rrdtool graph /data/rrd/content/total_btu.png \
+#--start end-12h --end now -S 60 \
+#-h 180 -w 700 \
+#DEF:tank=/data/rrd/boiler:tank:AVERAGE \
+#DEF:t1=/data/rrd/boiler:tank:AVERAGE \
+#DEF:t2=/data/rrd/boiler:tank:AVERAGE \
+#DEF:t3=/data/rrd/boiler:tank:AVERAGE \
+#DEF:t4=/data/rrd/boiler:tank:AVERAGE \
+#DEF:t5=/data/rrd/boiler:tank:AVERAGE \
+#DEF:out=/data/rrd/boiler:boiler:AVERAGE \
+#DEF:o1=/data/rrd/boiler:boiler:AVERAGE \
+#DEF:o2=/data/rrd/boiler:boiler:AVERAGE \
+#DEF:o3=/data/rrd/boiler:boiler:AVERAGE \
+#DEF:o4=/data/rrd/boiler:boiler:AVERAGE \
+#DEF:o5=/data/rrd/boiler:boiler:AVERAGE \
+#SHIFT:t1:120 \
+#SHIFT:t2:240 \
+#SHIFT:t3:360 \
+#SHIFT:t4:480 \
+#SHIFT:t5:600 \
+#SHIFT:o1:120 \
+#SHIFT:o2:240 \
+#SHIFT:o3:360 \
+#SHIFT:o4:480 \
+#SHIFT:o5:600 \
+#CDEF:out_btu=40,8.3,\*,out,o1,o2,+,o3,+,o4,+,o5,+,5,/,-,\*,10,\* \
+#CDEF:tank_btu=300,8.3,\*,tank,t1,t2,+,t3,+,t4,+,t5,+,5,/,-,\*,10,\* \
+#CDEF:total_btu=out_btu,tank_btu,+ \
+#--right-axis 1:0 \
+#--upper-limit 110000 \
+#--rigid \
+#--lower-limit -50000 \
+#LINE1:total_btu#0000FF:"Total BTU/h" \
+#LINE1:out_btu#FF0000:"Boiler BTU/h" \
+#LINE1:tank_btu#FF00FF:"Tank BTU/h" \
+#LINE1:0#000000:"Zero" \
+#>/dev/null
+
+rrdtool graph /data/rrd/content/public.png \
+--start end-12h --end now -S 60 \
+-h 40 -w 700 \
+DEF:public=/data/rrd/house:public:MAX \
+DEF:garage=/data/rrd/boiler:garage:MAX \
+DEF:private=/data/rrd/house:private:MAX \
+--right-axis 1:0 \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE4:private#FF0000:"Private Heat Call" \
+LINE2:public#0000FF:"Public Heat Call" \
+LINE1:garage#FF00FF:"Garage Heat Call" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/solar_pump.png \
+--start end-12h --end now -S 60 \
+-h 40 -w 700 \
+DEF:pump=/data/rrd/solar:pump:MAX \
+--right-axis 1:0 \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE1:pump#FF0000:"Solar Pump" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/boiler_fire.png \
+--start end-12h --end now -S 60 \
+-h 40 -w 700 \
+DEF:boiler_fire=/data/rrd/boiler:boiler_fire:MAX \
+DEF:boiler_run=/data/rrd/boiler:boiler_run:MAX \
+DEF:hot_water=/data/rrd/house:hot_water:MAX \
+--right-axis 1:0 \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE4:hot_water#0000FF:"Hot Water" \
+LINE2:boiler_fire#FF0000:"Boiler Fire" \
+LINE1:boiler_run#00FF00:"Boiler Run" \
+>/dev/null
+
+rrdtool graph /data/rrd/content/otherstuff.png \
+--start end-12h --end now -S 60 \
+-h 40 -w 700 \
+DEF:aquistat=/data/rrd/boiler:aquistat:MAX \
+DEF:wood_avail=/data/rrd/house:wood_avail:MAX \
+--right-axis 1:0 \
+--upper-limit 1.1 \
+--lower-limit -0.1 \
+LINE4:aquistat#0000FF:"Aquistat" \
+LINE2:wood_avail#FF0000:"Wood Available" \
+>/dev/null

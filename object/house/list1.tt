@@ -1,0 +1,6 @@
+[% INCLUDE house/header.tt %]
+<div id="hot_water_chart_div" style="width: 100%; height: 250px;"></div>
+<div style="text-align: center;"><a href="?d=[% s.in.d %]&f=2">show more</a></div>
+[% IF s.in.d == '2013-08-04' %]
+<div style="text-align: center;"><img src="http://erp-local.smalldognet.com/watertank.jpg"></div>
+[% END %]

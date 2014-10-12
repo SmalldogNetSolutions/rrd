@@ -1,0 +1,64 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawHeat);
+      function drawHeat() {
+        var data = new google.visualization.DataTable();
+		data.addColumn('string','Date');
+		data.addColumn('number','Wood');
+		data.addColumn('number','Heat');
+		data.addColumn('number','KW');
+		data.addRows([
+[% FOREACH l IN list %]['[% l.stat_date %]',[% l.wood_avail_percent %],[% l.heat_percent %],[% l.kw_sum %]][% UNLESS loop.last %],[% END %][% END %]
+        ]);
+
+        var options = {
+          title: 'Heat Summary',
+		  hAxis: { textPosition: 'none' },
+		  legend: { position: 'none' },
+		  chartArea:{ width:"95%", height:"80%" },
+		  vAxes:[
+			{ textPosition: 'none' },
+			{ textPosition: 'none' }
+		  ],
+		  series: {
+			0:{ type: "line", targetAxisIndex: 0 },
+			1:{ type: "line", targetAxisIndex: 0 },
+			2:{ type: "area", targetAxisIndex: 1 }
+		  }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('heat_chart_div'));
+        chart.draw(data, options);
+      }
+      google.setOnLoadCallback(drawWater);
+      function drawWater() {
+        var data = new google.visualization.DataTable();
+		data.addColumn('string','Date');
+		data.addColumn('number','Solar');
+		data.addColumn('number','Hot Water');
+		data.addColumn('number','Water Bottom');
+		data.addRows([
+[% FOREACH l IN list %]['[% l.stat_date %]',[% l.solar_pump_percent %],[% l.hot_water_percent %],[% l.water_bottom_max %]][% UNLESS loop.last %],[% END %][% END %]
+        ]);
+
+        var options = {
+          title: 'Hot Water Summary',
+		  hAxis: { textPosition: 'none' },
+		  legend: { position: 'none' },
+		  chartArea:{ width:"95%", height:"80%" },
+		  vAxes:[
+			{ textPosition: 'none' },
+			{ textPosition: 'none' }
+		  ],
+		  series: {
+			0:{ type: "line", targetAxisIndex: 0 },
+			1:{ type: "line", targetAxisIndex: 0 },
+			2:{ type: "area", targetAxisIndex: 1 }
+		  }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('water_chart_div'));
+        chart.draw(data, options);
+      }
+</script>

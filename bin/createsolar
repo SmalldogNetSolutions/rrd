@@ -1,0 +1,15 @@
+#! /bin/bash
+
+rrdtool create /data/rrd/solar -s 60 \
+DS:roof:GAUGE:90:0:200 \
+DS:tank:GAUGE:90:-20:200 \
+DS:light_level:GAUGE:90:0:1000 \
+DS:pump:GAUGE:90:0:1 \
+RRA:AVERAGE:0.5:1:1440 \
+RRA:MIN:0.5:1:1440 \
+RRA:MAX:0.5:1:1440 \
+RRA:LAST:0.5:1:1440 \
+RRA:MIN:0.5:60:2400 \
+RRA:MAX:0.5:60:2400 \
+RRA:LAST:0.5:60:2400 \
+RRA:AVERAGE:0.5:60:2400
