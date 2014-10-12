@@ -13,6 +13,9 @@ sub config {
 			ip => 'IP',
 			btu => 'BTU',
 			thermostat => 'Thermostat',
+			solar => 'Solar',
+			boiler => 'Boiler',
+			heat => 'Heat',
 			summary => 'Summary',
 			},
 		};
