@@ -27,7 +27,8 @@ sub main {
 	my @list;
 	if ($s->{in}{d}) {
 		@list = $s->db_q("
-			SELECT v.*, to_char(v.log_ts,'HH12:MI AM') as log_time
+			SELECT v.*, to_char(v.log_ts,'HH12:MI AM') as log_time,
+				COALESCE(v.kw_now,0)+COALESCE(v.kw_now_g,0) as kw_now_t
 			FROM logdata v
 			WHERE date(v.log_ts)=?
 			ORDER BY log_ts
@@ -35,7 +36,8 @@ sub main {
 			v => [ $d ]);
 	} else {
 		@list = $s->db_q("
-			SELECT v.*, to_char(v.log_ts,'HH12:MI AM') as log_time
+			SELECT v.*, to_char(v.log_ts,'HH12:MI AM') as log_time,
+				COALESCE(v.kw_now,0)+COALESCE(v.kw_now_g,0) as kw_now_t
 			FROM logdata v
 			WHERE v.log_ts >= now() - interval '24 hours'
 			ORDER BY log_ts

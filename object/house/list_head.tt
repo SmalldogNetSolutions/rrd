@@ -43,8 +43,9 @@
 		data.addColumn('number','Wood');
 		data.addColumn('number','KW');
 		data.addColumn('number','KWG');
+		data.addColumn('number','KWT');
 		data.addRows([
-[% FOREACH l IN list %]['[% l.log_time %]',[% l.hot_water %],[% l.public_heat %],[% l.private_heat %],[% l.wood_avail %],[% l.kw_now %],[% l.kw_now_g %]][% UNLESS loop.last %],[% END %][% END %]
+[% FOREACH l IN list %]['[% l.log_time %]',[% l.hot_water %],[% l.public_heat %],[% l.private_heat %],[% l.wood_avail %],[% l.kw_now %],[% l.kw_now_g %],[% l.kw_now_t %]][% UNLESS loop.last %],[% END %][% END %]
         ]);
 
         var options = {
@@ -62,7 +63,8 @@
 			2:{ type: "line", targetAxisIndex: 1, lineWidth: 8 },
 			3:{ type: "line", targetAxisIndex: 1, lineWidth: 8 },
 			4:{ type: "line", targetAxisIndex: 0 },
-			5:{ type: "line", targetAxisIndex: 0 }
+			5:{ type: "line", targetAxisIndex: 0 },
+			6:{ type: "line", targetAxisIndex: 0 }
 		  }
         };
 
