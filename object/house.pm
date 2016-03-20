@@ -15,6 +15,8 @@ sub config {
 			thermostat => 'Thermostat',
 			solar => 'Solar',
 			boiler => 'Boiler',
+			elech => 'Electricity House',
+			elecg => 'Electricity Garage',
 			heat => 'Heat',
 			summary => 'Summary',
 			},
