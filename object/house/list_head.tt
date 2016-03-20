@@ -41,11 +41,11 @@
 		data.addColumn('number','Public');
 		data.addColumn('number','Private');
 		data.addColumn('number','Wood');
+		data.addColumn('number','KWT');
 		data.addColumn('number','KW');
 		data.addColumn('number','KWG');
-		data.addColumn('number','KWT');
 		data.addRows([
-[% FOREACH l IN list %]['[% l.log_time %]',[% l.hot_water %],[% l.public_heat %],[% l.private_heat %],[% l.wood_avail %],[% l.kw_now %],[% l.kw_now_g %],[% l.kw_now_t %]][% UNLESS loop.last %],[% END %][% END %]
+[% FOREACH l IN list %]['[% l.log_time %]',[% l.hot_water %],[% l.public_heat %],[% l.private_heat %],[% l.wood_avail %],[% l.kw_now_t %],[% l.kw_now_g %],[% l.kw_now %]][% UNLESS loop.last %],[% END %][% END %]
         ]);
 
         var options = {
